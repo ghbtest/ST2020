@@ -6,7 +6,9 @@ import sys
 
 #%%
 # DATA_PATH = os.path.abspath(os.path.join(os.path.dirname(os.path.abspath(__file__)), "..", "data")) + "/"
-DATA_PATH="/Users/robin/Research/ST2020/data/"
+# DATA_PATH="/Users/robin/Research/ST2020/data/"
+DATA_PATH="/Users/robinlu/Research/SIGTYP/ST2020/data/"
+
 MISSING = defaultdict(lambda: defaultdict(lambda: set()))
 
 
@@ -92,9 +94,11 @@ class TestFile:
         self.lang_values = defaultdict(Counter)
         self.available_feature_values = defaultdict(Counter)
         self.genus2family = {}
-
+        filename=files[0]
         with open(filename) as f:
             for l in f.read().splitlines():
+                print (l)
+                
                 if l.startswith("wals_code") or not l.strip():
                     continue
                 # Construct Sample and add to dict
@@ -212,7 +216,8 @@ class FileTriple:
                 for (name, acc) in self.accuracy_per_feature_field(field, mode):
                     print(f"{name}\t{acc:.4f}")
 
-files=["/Users/robin/Research/ST2020/scripts/test_gold_dup.tsv"]
+# files=["/Users/robin/Research/ST2020/scripts/test_gold_dup.tsv"]
+files=["/Users/robinlu/Research/SIGTYP/ST2020/scripts/test_gold_dup2.tsv"]
 filetriples = [FileTriple(filename) for filename in files]
 ex = filetriples[0]
 
@@ -248,3 +253,4 @@ for triple in filetriples:
 
 #%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 vscode go to definition no definition found
+
