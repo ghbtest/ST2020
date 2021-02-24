@@ -5,14 +5,17 @@ import os.path
 import sys
 
 #%%
-DATA_PATH = os.path.abspath(os.path.join(os.path.dirname(os.path.abspath(__file__)), "..", "data")) + "/"
+# DATA_PATH = os.path.abspath(os.path.join(os.path.dirname(os.path.abspath(__file__)), "..", "data")) + "/"
+DATA_PATH="/Users/robin/Research/ST2020/data/"
 MISSING = defaultdict(lambda: defaultdict(lambda: set()))
 
 
 class Sample:
     def __init__(self, line):
         # Heuristically determine format
+        print (f"line is: {line}")
         split_line = line.split("\t")
+        print (f"split_line is: {split_line}")        
         if len(split_line) < 8:
             # Abbreviated format.
             (lang_id, lang_name, family, *feature_pieces,) = split_line
@@ -209,8 +212,8 @@ class FileTriple:
                 for (name, acc) in self.accuracy_per_feature_field(field, mode):
                     print(f"{name}\t{acc:.4f}")
 
-
-filetriples = [FileTriple(filename) for filename in sys.argv[1:]]
+files=["/Users/robin/Research/ST2020/scripts/test_gold_dup.tsv"]
+filetriples = [FileTriple(filename) for filename in files]
 ex = filetriples[0]
 
 for mode in ("micro",):  #, "macro"):
@@ -242,3 +245,6 @@ for triple in filetriples:
     if MISSING[triple.name]:
         broken_langs = [(lang, len(MISSING[triple.name][lang])) for lang in MISSING[triple.name]]
         print(f"{triple.name} missing {sum([c for _, c in broken_langs])}/2417 features in {len(broken_langs)}/149 languages!")
+
+#%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+vscode go to definition no definition found
